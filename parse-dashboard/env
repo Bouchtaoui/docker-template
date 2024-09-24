@@ -1,0 +1,12 @@
+# Rename this file .env
+
+# From my experience, these two variables are not necessary 
+API_SERVER_URL=http://backend:1337/parse
+DASHBOARD_COOKIE_SESSION_SECRET="some cookie secret"
+
+# Shows the name of the dashboard
+DASHBOARD_APP_NAME=--ParseDashBoard--
+
+# This is needed to force authentication
+DASHBOARD_USER_ID=admin
+DASHBOARD_USER_PASSWORD=dashboardpwd
