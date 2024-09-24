@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  # PARSE DASHBOARD
+  parse-dashboard:
+    image: parseplatform/parse-dashboard
+    expose:
+      - 4040
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # this line is very important
+      - ./dashboard-config.json:/src/Parse-Dashboard/parse-dashboard-config.json
+    environment:
+      PARSE_DASHBOARD_TRUST_PROXY: 1
+      PARSE_DASHBOARD_USER_ID: ${DASHBOARD_USER_ID}
+      PARSE_DASHBOARD_USER_PASSWORD: ${DASHBOARD_USER_PASSWORD}
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.parse-dashboard.rule=Host(`parse-dashboard.duckdns.org`)
+    #                        ^^^^^^^^^^^^^^^ <-- must be unique with traefik
+networks:
+  traefik:
+    external: true
