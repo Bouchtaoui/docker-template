@@ -1,0 +1,47 @@
+---
+# source: https://dev.to/karvounis/basic-traefik-configuration-tutorial-593m
+version: '3.8'
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:v3.0
+    ports:
+      - 80:80
+      - 443:443
+      # remove below port when in production
+      - 8080:8080
+    networks:
+      - traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
+      - ./log:/var/log
+    command:
+      # enables dashboard
+      - --api.insecure=true
+      - --api.dashboard=true
+
+      # don't expose containers by default
+      - --providers.docker=true
+      - --providers.docker.network=traefik
+      - --providers.docker.exposedbydefault=false
+      - --log.level=info
+
+      # Entrypoints configuration
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entryPoints.web.http.redirections.entrypoint.scheme=https
+
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.websecure.asDefault=true
+      - --entrypoints.websecure.http.tls.certresolver=tlsresolver
+
+      # SSL resolver with Letsencrypt
+      - --certificatesresolvers.tlsresolver.acme.tlschallenge=true
+      - --certificatesresolvers.tlsresolver.acme.email=xyz@gmail.com
+      - --certificatesresolvers.tlsresolver.acme.storage=/letsencrypt/acme.json
+
+
+networks:
+  traefik:
+    external: true
