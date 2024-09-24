@@ -1,0 +1,23 @@
+{
+	"apps": [
+		{
+			"serverURL": "https://parse-server.duckdns.org/parse",
+			"appId": "xxxxx------------------------------xxxxx",
+			"masterKey": "yyyyy------------------------------yyyyy",
+			"appName": "Parse Backend",
+			"enableSecurityChecks": true
+		}
+	],
+	"users": [
+		{
+			"user": "admin1",
+			"pass": "topsecret"
+		},
+		{
+			"user": "admin2",
+			"pass": "topsecret"
+		}
+	],
+	"useEncryptedPasswords": false,
+	"trustProxy": 1
+}
