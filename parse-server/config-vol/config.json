@@ -1,0 +1,5 @@
+{
+  "appId": "abcd...cb17",
+  "masterKey": "1234...80b7",
+  "databaseURI": "mongodb://mongo-db:27017/parse"
+}
