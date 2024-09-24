@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  # PARSE SERVER
+  # example: https://github.com/parse-community/parse-server/issues/7793
+  backend:
+    image: parseplatform/parse-server:6.5.8
+    container_name: parse-backend
+    expose:
+      - 1337
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config-vol:/parse-server/config
+    entrypoint: ["node", "./bin/parse-server", "./config/config.json"]
+    environment:
+      PARSE_SERVER_REST_API_KEY: ${REST_API_KEY}
+      PARSE_SERVER_CLIENT_KEY: ${CLIENT_KEY}
+      PARSE_SERVER_JAVASCRIPT_KEY: ${JAVASCRIPT_KEY}
+      PARSE_SERVER_MASTER_KEY_IPS: 0.0.0.0/0
+      VERBOSE: true
+    networks:
+      # to communicate with MongoDB
+      - parse-network
+      # to communicate with Traefik
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.parse-server.rule=Host(`parse-server.duckdns.org`)
+
+networks:
+  parse-network:
+    external: true
+  traefik:
+    external: true
