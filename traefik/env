@@ -1,0 +1,3 @@
+# Rename this file to .env
+
+# Add sensitive variables to be used in docker-compose.yml
