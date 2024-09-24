@@ -1,0 +1,13 @@
+# Rename this file to .env
+
+# if using db authentication
+MONGO_ROOT_USERNAME=root
+MONGO_ROOT_PASSWORD=mongopwd
+
+# Provide your own generated hashes
+APPLICATION_ID=xxxxcb17ad99812533bb8a0096005cd19dfxxxx
+MASTER_KEY=yyyy640e42aa1d2ea78165b73fa936785b52yyyy
+CLIENT_KEY=zzzz655a958c6fecc362ba006b013d3edfc6zzzz
+JAVASCRIPT_KEY=0000b55e0ce96e1ad711adaac266c9200cbc0000
+REST_API_KEY=1111c36590a631782520e6a608fdd27e45441111
+DATABASE_URI=mongodb://mongo-db:27017/parse
