@@ -12,6 +12,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./config-vol:/parse-server/config
+    # the entrypoint below assumes the command is executed within the container, hence '/config/...' instead of '/config0vol/...'
     entrypoint: ["node", "./bin/parse-server", "./config/config.json"]
     environment:
       PARSE_SERVER_REST_API_KEY: ${REST_API_KEY}
